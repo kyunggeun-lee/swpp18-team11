@@ -1,0 +1,21 @@
+<div>
+  <mat-list>
+    <mat-list-item *ngFor="let option of options">
+        <div>
+          <label id="optionName{{option.id}}">{{option.name}}&nbsp;&nbsp;</label>
+          <label id="optionPrice{{option.id}}">{{option.base_price}}원</label>
+        </div>
+        <div class="quantity-control-buttons">
+          <button mat-button
+                  class="quantity-button"
+                  (click)="option.decrement()"
+                  [disabled]="option.quantity < 1">-</button>
+          <label id="optionQuantity{{option.id}}">{{option.quantity}}개</label>
+          <button mat-button
+                  class="quantity-button"
+                  (click)="option.increment()"
+                  [disabled]="option.quantity >= option.max_capacity">+</button>
+        </div>
+    </mat-list-item>
+  </mat-list>
+</div>
