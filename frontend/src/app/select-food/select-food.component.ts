@@ -31,8 +31,8 @@ export class SelectFoodComponent implements OnInit {
       });
   }
 
-  mathFloor(num: number): number {
-    return Math.floor(num);
+  mathFloor(num_: number): number {
+    return Math.floor(num_);
   }
 
   getCategories(): void {
