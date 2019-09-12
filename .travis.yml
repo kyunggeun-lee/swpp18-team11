@@ -1,5 +1,3 @@
-notifications:
-  slack: swppblender2018:soN9EST68mFickJ8zWLpaFQL
 matrix:
   include:
   - language: node_js
