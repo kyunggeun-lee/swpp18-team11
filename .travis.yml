@@ -35,6 +35,10 @@ matrix:
             - libspatialite-dev
             - libsqlite3-mod-spatialite
             - gdal-bin
+        sonarcloud:
+          organization: "kyunggeun-lee"
+          token:
+            secure: "94d47c53fabc3823d962e7fbe139bffe0a6407bd" # encrypted value of your token
       cache:
         apt: true
       before_install: 
@@ -46,4 +50,6 @@ matrix:
       script:
         - cd kiwi
         - pipenv run pytest --cov kiorder/services --cov kiorder/models --cov kiorder/api
+        # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+        - sonar-scanner
 
