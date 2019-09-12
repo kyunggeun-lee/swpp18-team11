@@ -2,54 +2,51 @@ notifications:
   slack: swppblender2018:soN9EST68mFickJ8zWLpaFQL
 matrix:
   include:
-    - language: node_js
-      node_js:
-        - "8"
-      dist: trusty
-      sudo: true
-      cache:
-        directories:
-          - frontend/node_modules
-      addons:
-        chrome: stable
-      branches:
-        except:
-          - /^temp\/.*$/
-      before_install:
-        - cd frontend
-        - yarn global add @angular/cli
-      install:
-        - yarn
-      script:
-        - yarn lint
-        - yarn test --karma-config src/karma-ci.conf.js --code-coverage
-
-    - language: python
-      python: 3.7
-      dist: xenial
-      addons:
-        apt:
-          packages:
-            - libproj-dev
-            - libgeos-dev
-            - libspatialite-dev
-            - libsqlite3-mod-spatialite
-            - gdal-bin
-        sonarcloud:
-          organization: "kyunggeun-lee"
-          token:
-            secure: "94d47c53fabc3823d962e7fbe139bffe0a6407bd" # encrypted value of your token
-      cache:
-        apt: true
-      before_install: 
-        - cd backend
-        - pip install pipenv
-        - sudo apt-get update
-      install:
-        - pipenv install --dev
-      script:
-        - cd kiwi
-        - pipenv run pytest --cov kiorder/services --cov kiorder/models --cov kiorder/api
-        # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-        - sonar-scanner
-
+  - language: node_js
+    node_js:
+    - '8'
+    dist: trusty
+    sudo: true
+    cache:
+      directories:
+      - frontend/node_modules
+    addons:
+      chrome: stable
+    branches:
+      except:
+      - "/^temp\\/.*$/"
+    before_install:
+    - cd frontend
+    - yarn global add @angular/cli
+    install:
+    - yarn
+    script:
+    - yarn lint
+    - yarn test --karma-config src/karma-ci.conf.js --code-coverage
+  - language: python
+    python: 3.7
+    dist: xenial
+    addons:
+      apt:
+        packages:
+        - libproj-dev
+        - libgeos-dev
+        - libspatialite-dev
+        - libsqlite3-mod-spatialite
+        - gdal-bin
+      sonarcloud:
+        organization: kyunggeun-lee
+        token:
+          secure: "nhwmYchavWh9kUlCC3AsKczgH9KE/JYabNuN0uOTaCG+scmRKVVKMMNPDzplY7yFGb0ciCtRpwMrXoNgmhGMbprkjqcK3IKv3jkYjsW0UDDteKtQMEuUIBk5ti4drL0qI0Mt8UBBDpZd7QmG6LafPeuV3Gn1rLk1wJxlNiZEUjP0hEdmvMxt/FlyiGpDixGlvW0u0pqsUF9LCoLOPqJoPsDVkgwKilyhCuE4Hd5VGSJPne8aCKGvgoTK8GRrZKlyxNG8mGMJiJXsY7B305T1dSLgZZ0AqCz2+r+DQxQwX0xLf35vzlFEPzHjnquCFdWSjr3Yyc1rWCD0Gb5bG1atZqAJZXPAGzDZyHO9C0js+0h+4yKX+lUPyn8qwlj4TriC6dp1veCnCxM0ukukhy8T2Dh4UAiK6VM/oHX+Z/J2rHV7NtJfCU+JUX1Nw53oPGzIGZRgmak3G9eB3XXNkedilzlW/a7c1qQazcPzDIghlyHnk/1lzu/wWlZDpH7GYQY/6dchvhwWtOKp9Eu+AeQC/NRSnFR09ZNlrtqpsc/20viUMlRIEop44S6qVr0uDOfpQZ29P1bPRTozlQWEjwuVF4wwZdl4wJpjRWg3ngTNvz8WOHz6YRTgbQzVVbJ2aFiglYqhfitexBK3NUXKbR5L9FzDGInudNOOSiBkZsMA7GY="
+    cache:
+      apt: true
+    before_install:
+    - cd backend
+    - pip install pipenv
+    - sudo apt-get update
+    install:
+    - pipenv install --dev
+    script:
+    - cd kiwi
+    - pipenv run pytest --cov kiorder/services --cov kiorder/models --cov kiorder/api
+    - sonar-scanner
